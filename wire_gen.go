@@ -6,23 +6,24 @@
 package main
 
 import (
+	"github.com/teitei-tk/goodbyte-twitter-history/app"
 	"github.com/teitei-tk/goodbyte-twitter-history/cli"
 )
 
 // Injectors from wire.go:
 
-func InitializeApp(flags *cli.CliFlags) *App {
-	appConf := &AppConf{
+func InitializeApp(flags *cli.CliFlags) *app.App {
+	appConf := &app.AppConf{
 		Input: flags,
 	}
-	app := NewApp(appConf)
-	return app
+	appApp := app.NewApp(appConf)
+	return appApp
 }
 
 // wire.go:
 
-func appConfig(flags *cli.CliFlags) *AppConf {
-	return &AppConf{
+func appConfig(flags *cli.CliFlags) *app.AppConf {
+	return &app.AppConf{
 		Input: flags,
 	}
 }
