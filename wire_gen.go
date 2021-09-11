@@ -6,8 +6,8 @@
 package main
 
 import (
-	"github.com/teitei-tk/goodbyte-twitter-history/app"
-	"github.com/teitei-tk/goodbyte-twitter-history/cli"
+	"github.com/teitei-tk/go-tweetdel/app"
+	"github.com/teitei-tk/go-tweetdel/cli"
 )
 
 // Injectors from wire.go:

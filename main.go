@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/teitei-tk/goodbyte-twitter-history/cli"
+	"github.com/teitei-tk/go-tweetdel/cli"
 )
 
 func main() {

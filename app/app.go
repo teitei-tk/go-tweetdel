@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/google/wire"
-	"github.com/teitei-tk/goodbyte-twitter-history/cli"
+	"github.com/teitei-tk/go-tweetdel/cli"
 )
 
 var AppSet = wire.NewSet(

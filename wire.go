@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/google/wire"
-	"github.com/teitei-tk/goodbyte-twitter-history/app"
-	"github.com/teitei-tk/goodbyte-twitter-history/cli"
+	"github.com/teitei-tk/go-tweetdel/app"
+	"github.com/teitei-tk/go-tweetdel/cli"
 )
 
 func appConfig(flags *cli.CliFlags) *app.AppConf {
