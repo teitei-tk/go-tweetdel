@@ -13,6 +13,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if err := flags.Validate(); err != nil {
+		log.Fatal(err)
+	}
+
 	app := InitializeApp(flags)
 	if err := app.Run(); err != nil {
 		log.Fatalf("app fail. %v", err)

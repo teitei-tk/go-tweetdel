@@ -2,6 +2,8 @@ package cli
 
 import (
 	"flag"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/pkg/errors"
@@ -55,7 +57,7 @@ func ParseFlags(prgName string, args []string) (*CliFlags, error) {
 		return nil
 	})
 
-	flags.StringVar(&f.ArchiveDir, "archiveDir", "./twitter-archives", "your twitter data archive dir path")
+	flags.StringVar(&f.ArchiveDir, "archiveDir", "archive", "your twitter data archive dir path")
 	flags.StringVar(&f.RunMode, "runMode", RunMode_Dry, "The execution status of the application, which can be either 'dry' or 'run'. The initial value is dry.")
 
 	if err := flags.Parse(args); err != nil {
@@ -63,4 +65,31 @@ func ParseFlags(prgName string, args []string) (*CliFlags, error) {
 	}
 
 	return f, nil
+}
+
+func (f *CliFlags) Validate() error {
+	if f.From.After(f.To) {
+		return errors.Errorf("invalid time range. from: %v > to: %v", f.From, f.To)
+	}
+
+	archivePath, err := filepath.Abs(f.ArchiveDir)
+	if err != nil {
+		return err
+	}
+
+	_, err = os.Stat(archivePath)
+	if err != nil && os.IsNotExist(err) {
+		return errors.Wrap(err, "dose not archive directory")
+	}
+
+	_, err = os.Stat(filepath.Join(archivePath, "data", "tweet.js"))
+	if err != nil && os.IsNotExist(err) {
+		return errors.Wrap(err, "does not tweet.js")
+	}
+
+	if f.RunMode != RunMode_Dry && f.RunMode != RunMode_Run {
+		return errors.New("invalid runMode")
+	}
+
+	return nil
 }
