@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	RunMode_Dry = "dry"
-	RunMode_Run = "run"
+	RunMode_Detect = "detect"
+	RunMode_Run    = "run"
 
 	dateLayout = "2006-01"
 )
@@ -58,7 +58,7 @@ func ParseFlags(prgName string, args []string) (*CliFlags, error) {
 	})
 
 	flags.StringVar(&f.ArchiveDir, "archiveDir", "archive", "your twitter data archive dir path")
-	flags.StringVar(&f.RunMode, "runMode", RunMode_Dry, "The execution status of the application, which can be either 'dry' or 'run'. The initial value is dry.")
+	flags.StringVar(&f.RunMode, "runMode", RunMode_Detect, "The execution status of the application, which can be either 'detect' or 'run'. The initial value is detect.")
 
 	if err := flags.Parse(args); err != nil {
 		return nil, errors.Wrap(err, "failed flag parse")
@@ -87,7 +87,7 @@ func (f *CliFlags) Validate() error {
 		return errors.Wrap(err, "does not tweet.js")
 	}
 
-	if f.RunMode != RunMode_Dry && f.RunMode != RunMode_Run {
+	if f.RunMode != RunMode_Detect && f.RunMode != RunMode_Run {
 		return errors.New("invalid runMode")
 	}
 
