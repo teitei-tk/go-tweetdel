@@ -2,6 +2,7 @@ package cli
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"path/filepath"
 	"time"
@@ -88,7 +89,7 @@ func (f *CliFlags) Validate() error {
 	}
 
 	if f.RunMode != RunMode_Detect && f.RunMode != RunMode_Run {
-		return errors.New("invalid runMode")
+		return errors.New(fmt.Sprintf("%s is invalid runMode", f.RunMode))
 	}
 
 	return nil

@@ -23,5 +23,12 @@ func NewApp(p *AppConf) *App {
 }
 
 func (a *App) Run() error {
+	switch a.params.Input.RunMode {
+	case cli.RunMode_Detect:
+		if err := NewDetectMode(a); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
